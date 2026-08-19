@@ -1,0 +1,23 @@
+[
+    {
+        "resource_type": "aws_s3_bucket",
+        "resource_name": "unsecure_logs",
+        "finding": "S3 bucket is configured with public-read access, allowing anyone on the internet to read the bucket contents.",
+        "severity": "Critical",
+        "remediation": "Change the ACL to 'private' and implement the aws_s3_bucket_public_access_block resource to ensure all public access is blocked."
+    },
+    {
+        "resource_type": "aws_security_group",
+        "resource_name": "open_ssh",
+        "finding": "Security group allows inbound SSH traffic (port 22) from any source IP (0.0.0.0/0), exposing the resource to brute-force attacks.",
+        "severity": "Critical",
+        "remediation": "Restrict the ingress cidr_blocks to specific trusted IP ranges or use AWS Systems Manager Session Manager for access instead of port 22."
+    },
+    {
+        "resource_type": "aws_iam_user",
+        "resource_name": "admin_user",
+        "finding": "The IAM user resource does not define or enforce Multi-Factor Authentication (MFA), increasing the risk of unauthorized account access.",
+        "severity": "Medium",
+        "remediation": "Implement an IAM policy that enforces MFA for all console and CLI actions, or migrate to AWS IAM Identity Center for centralized access control."
+    }
+]
