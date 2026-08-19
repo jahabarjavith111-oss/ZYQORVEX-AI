@@ -1,0 +1,14 @@
+[
+    {
+        "commit_hash": "PATCH_MM_001",
+        "title": "Conditional refcount check in free_page_data",
+        "affected_subsystem": "mm",
+        "security_flag": "HIGH",
+        "potential_issues": [
+            "Use-After-Free (UAF)",
+            "Dangling Pointer",
+            "Stale State Inconsistency"
+        ],
+        "human_readable_summary": "The patch introduces a conditional check on p->refcount before freeing p->data but removes the assignment that sets p->state to PAGE_FREE. This results in the page object retaining an active state despite its data buffer being released to the allocator. Subsequent kernel operations may attempt to access p->data, leading to a Use-After-Free vulnerability."
+    }
+]
