@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hardened-nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      securityContext:
+        # Enforces running as a non-root user for the whole Pod
+        runAsNonRoot: true
+        # Specifies the UID to run the processes under
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          # Required: Blocks the container from gaining additional privileges
+          allowPrivilegeEscalation: false
+          # Required: Ensures the root filesystem cannot be written to
+          readOnlyRootFilesystem: true
+          # Required: Ensures the container explicitly runs non-root
+          runAsNonRoot: true
+          # Explicitly set the UID
+          runAsUser: 1000
+          # Best practice: Drop all Linux capabilities
+          capabilities:
+            drop:
+            - ALL
