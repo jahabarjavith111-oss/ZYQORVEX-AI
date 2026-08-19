@@ -1,0 +1,10 @@
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -102,6 +102,8 @@ void free_page_data(struct page *p) {
+-    kfree(p->data);
+-    p->state = PAGE_FREE;
++    if (p->refcount == 0) {
++        kfree(p->data);
++        // BUG: We forgot to set p->state here, leading to potential UAF
++    }
+ }
