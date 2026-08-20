@@ -49,8 +49,8 @@ ZYQORVEX-AI leverages the **Google GenAI SDK** to implement a "Reasoning Path" f
 
 1. **Clone the Repository:**
    ```bash
-git clone [https://github.com/jahabarjavith111-oss/ZYQORVEX-AI.git](https://github.com/jahabarjavith111-oss/ZYQORVEX-AI.git)
-    cd ZYQORVEX-AI
+   git clone https://github.com/jahabarjavith111-oss/ZYQORVEX-AI.git
+   cd ZYQORVEX-AI
    ```
 Environment Setup:
 
@@ -74,4 +74,3 @@ python3 main.py
 ```
 ⚖️ License
 ZYQORVEX-AI  |  Author: ABDUL JAVID (@jahabarjavith111-oss)  |  Licensed under the Apache License, Version 2.0
-
